@@ -42,6 +42,30 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(LocalDataManager.getCreateDistrictTehsil());
         db.setTransactionSuccessful();
         db.endTransaction();
+
+
+
+        db.beginTransaction();
+
+        db.execSQL(LocalDataManager.getComplaintCategories());
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+
+
+        db.beginTransaction();
+
+        db.execSQL(LocalDataManager.getIncidentNature());
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+
+
+        db.beginTransaction();
+
+        db.execSQL(LocalDataManager.getComplaintDamageType());
+        db.setTransactionSuccessful();
+        db.endTransaction();
     }
 
     @Override
@@ -58,6 +82,18 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(query);
 
         query = "DROP TABLE IF EXISTS " + "DistrictTehsil";
+        db.execSQL(query);
+
+
+        query = "DROP TABLE IF EXISTS " + "ComplaintCategories";
+        db.execSQL(query);
+
+
+        query = "DROP TABLE IF EXISTS " + "IncidentNature";
+        db.execSQL(query);
+
+
+        query = "DROP TABLE IF EXISTS " + "ComplaintDamageType";
         db.execSQL(query);
 
         db.setTransactionSuccessful();

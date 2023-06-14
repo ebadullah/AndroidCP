@@ -1,9 +1,10 @@
 package com.mobilisepakistanirfan.pdma.global;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
+import com.mobilisepakistanirfan.pdma.data.LocalDataManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,29 +18,31 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 
-public class GetDistrictServer extends AsyncTask {
+public class GetIncidentNatureServer extends AsyncTask {
 
 
     Context mContext;
-    ProgressDialog mDialog;
+    //  ProgressDialog mDialog;
     String mUserMsg, URL;
-
-    public GetDistrictServer(Context context, String URL) {
+    MyPref preferences;
+    public GetIncidentNatureServer(Context context, String URL) {
         this.mContext = context;
         this.URL = URL;
+        preferences = new MyPref(context);
 
-        mDialog = new ProgressDialog(context);
+        //    mDialog = new ProgressDialog(context);
 
 
     }
 
     @Override
     protected void onPreExecute() {
-        //     mDialog.setMessage("Loading Data...");
-        //    mDialog.setCancelable(false);
-        //   mDialog.show();
+        // mDialog.setMessage("Loading Data...");
+        // mDialog.setCancelable(false);
+        // mDialog.show();
 
         super.onPreExecute();
     }
@@ -59,6 +62,7 @@ public class GetDistrictServer extends AsyncTask {
 
             OutputStream os = connection.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+
 
 
             bw.flush();
@@ -88,31 +92,50 @@ public class GetDistrictServer extends AsyncTask {
         try {
 
             //connection isn't available or something is wrong with server address
-            if (mUserMsg != null)
-                throw new IOException();
+            if(mUserMsg != null)
+                throw  new IOException();
 
 
-            String resp = (String) o;
+            String resp = (String)o;
 
-            JsonArray.ArrayString = resp;
+            JsonArray.ArrayString=resp;
 
             JSONObject jsonObj = new JSONObject(resp);
 
             // Getting JSON Array node
             JSONArray contacts = jsonObj.getJSONArray("result");
 
+            // District.listDistrict.clear();
+            // District.listDistrictid.clear();
 
+            ArrayList<String> lstdistrict=new ArrayList<>();
+            ArrayList<String> lstDistriid=new ArrayList<>();
             for (int i = 0; i < contacts.length(); i++) {
 
                 JSONObject c = contacts.getJSONObject(i);
 
+                lstdistrict.add(c.getString("incident_nature_title"));
+                lstDistriid.add(c.getString("incident_nature_id"));
 
             }
 
+            int ccc=preferences.getappcount()+1;
+            preferences.setappcount(ccc);
 
-            if (resp == null || resp.equals(""))
+            LocalDataManager.InsertIncidentNature(lstdistrict,lstDistriid,mContext);
+
+            Toast.makeText(mContext,"Application data has been updated",Toast.LENGTH_LONG).show();
+
+            // restart app due to GPS first time installition issue
+
+
+            //
+
+
+
+            if ( resp == null || resp.equals(""))
                 throw new NullPointerException("Server response is empty");
-            else if (resp.equals("-1")) {
+            else if(resp.equals("-1")){
                 mUserMsg = "Incorrect username or password";
             } else {
                 mUserMsg = null;
@@ -120,10 +143,10 @@ public class GetDistrictServer extends AsyncTask {
 
             }
 
-        } catch (IOException e) {
+        }  catch (IOException e) {
             //if connection was available via connecting but
             //we can't get data from server..
-            if (mUserMsg == null)
+            if(mUserMsg == null)
                 mUserMsg = "Please check connection";
             e.printStackTrace();
         } catch (NullPointerException e) {
@@ -136,7 +159,7 @@ public class GetDistrictServer extends AsyncTask {
                 Toast.makeText(mContext, mUserMsg, Toast.LENGTH_SHORT).show();
         }
         // hide the progressDialog
-        mDialog.hide();
+        //  mDialog.hide();
 
         super.onPostExecute(o);
     }

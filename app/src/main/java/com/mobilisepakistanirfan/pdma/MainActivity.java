@@ -41,7 +41,10 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.navigation.NavigationView;
 import com.mobilisepakistanirfan.WeatherAdvisOption;
+import com.mobilisepakistanirfan.pdma.global.GetComplaintCategoriesServer;
+import com.mobilisepakistanirfan.pdma.global.GetComplaintDamageTypeServer;
 import com.mobilisepakistanirfan.pdma.global.GetDistrictServer;
+import com.mobilisepakistanirfan.pdma.global.GetIncidentNatureServer;
 import com.mobilisepakistanirfan.pdma.global.GetTehsilServer;
 import com.mobilisepakistanirfan.pdma.global.MyPref;
 import com.mobilisepakistanirfan.pdma.global.MyReceiver;
@@ -250,7 +253,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             try {
                 new GetTehsilServer(MainActivity.this, ServerConfiguration.ServerURL + "GetTehsilAction").execute().get();
                 new GetDistrictServer(MainActivity.this, ServerConfiguration.ServerURL + "GetDistrictsAction").execute();
-
+                new GetComplaintCategoriesServer(MainActivity.this, ServerConfiguration.ServerURL + "GetComplaintCategoriesAction").execute().get();
+                new GetIncidentNatureServer(MainActivity.this, ServerConfiguration.ServerURL + "GetIncidentNatureAction").execute().get();
+                new GetComplaintDamageTypeServer(MainActivity.this, ServerConfiguration.ServerURL + "GetComplaintDamageTypeAction").execute().get();
 
             } catch (ExecutionException e) {
                 e.printStackTrace();

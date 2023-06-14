@@ -64,7 +64,7 @@
                         android:layout_marginBottom="15dp"
                         android:layout_marginEnd="5dp"
                         android:background="@drawable/roundedtxview"
-                       android:text="@string/complaintheadertext"
+                        android:text="@string/complaintheadertext"
                         android:padding="15dp"
                         android:textSize="15sp"
                         android:id="@+id/ed_search"
@@ -79,6 +79,133 @@
 
                 </LinearLayout>
 
+
+
+                <LinearLayout style="@style/nLinerLayout">
+
+                    <LinearLayout style="@style/StaricLinLayout">
+
+                        <TextView
+                            style="@style/SLable"
+                            android:text="@string/s_complaint_cateogry" />
+
+                        <TextView style="@style/StaricTextview" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lcomplaintcategory"
+                        style="@style/IconLinLayout"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/rd1Tv"
+                            style="@style/SResponce"
+                            android:layout_width="0dp"
+                            android:layout_weight="100"
+                            android:hint="@string/s_complaint_cateogry"
+
+                            />
+
+                        <ImageView style="@style/DownImageView" />
+
+                    </LinearLayout>
+
+                    <View style="@style/nView" />
+
+                </LinearLayout>
+
+
+                <LinearLayout style="@style/nLinerLayout">
+
+                    <LinearLayout style="@style/StaricLinLayout">
+
+                        <TextView
+                            style="@style/SLable"
+                            android:text="@string/s_complaint_nature" />
+
+                        <TextView style="@style/StaricTextview" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lcomplaintincidentnature"
+                        style="@style/IconLinLayout"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/rd1cn"
+                            style="@style/SResponce"
+                            android:layout_width="0dp"
+                            android:layout_weight="100"
+                            android:hint="@string/s_complaint_nature"
+
+                            />
+
+                        <ImageView style="@style/DownImageView" />
+
+                    </LinearLayout>
+
+                    <View style="@style/nView" />
+
+                </LinearLayout>
+
+
+                <LinearLayout style="@style/nLinerLayout">
+
+                    <LinearLayout style="@style/StaricLinLayout">
+
+                        <TextView
+                            style="@style/SLable"
+                            android:text="@string/s_complaint_damagetype" />
+
+                        <TextView style="@style/StaricTextview" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lcomplaintdamagetype"
+                        style="@style/IconLinLayout"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/rd1cdt"
+                            style="@style/SResponce"
+                            android:layout_width="0dp"
+                            android:layout_weight="100"
+                            android:hint="@string/s_complaint_damagetype"
+
+                            />
+
+                        <ImageView style="@style/DownImageView" />
+
+                    </LinearLayout>
+
+                    <View style="@style/nView" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/nLinerLayout"
+
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+                    android:background="@color/white_pressed"
+                    android:layout_marginTop="10dp">
+
+
+                    <Button
+                        style="@style/SResponce"
+                        android:id="@+id/btnIncidentDate"
+                        android:text="@string/s_incidentdate"
+                        android:layout_weight="30"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/Lable"
+                        android:background="@color/white" />
+
+
+                </LinearLayout>
 
 
                 <LinearLayout style="@style/nLinerLayout">
