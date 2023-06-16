@@ -263,6 +263,7 @@
                         android:id="@+id/dna6Tv"
                         style="@style/SResponce"
                         android:hint="@string/dna6"
+                        android:maxLength="13"
                         android:inputType="number" />
 
                     <View style="@style/nView" />
@@ -284,6 +285,7 @@
                         android:id="@+id/dna7Tv"
                         style="@style/SResponce"
                         android:hint="@string/dna7"
+                        android:maxLength="11"
                         android:inputType="phone" />
 
                     <View style="@style/nView" />

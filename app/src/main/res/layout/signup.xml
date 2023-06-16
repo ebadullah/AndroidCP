@@ -250,7 +250,7 @@
                         <EditText
                             style="@style/SResponce"
                             android:hint="@string/su_mob"
-
+                            android:maxLength="11"
                             android:inputType="number"
                             android:id="@+id/mobileno" />
                     </LinearLayout>

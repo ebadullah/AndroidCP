@@ -64,7 +64,7 @@
                         android:layout_marginBottom="15dp"
                         android:layout_marginEnd="5dp"
                         android:background="@drawable/roundedtxview"
-                        android:text="@string/complaintheadertext"
+                       android:text="@string/complaintheadertext"
                         android:padding="15dp"
                         android:textSize="15sp"
                         android:id="@+id/ed_search"
