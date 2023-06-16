@@ -5,10 +5,10 @@
     <item android:title="@string/s_h_set">
         <menu>
 
-            <item
-                android:id="@+id/st_sigup"
+<!--            <item-->
+<!--                android:id="@+id/st_sigup"-->
 
-                android:title="@string/lg_sign" />
+<!--                android:title="@string/lg_sign" />-->
             <item
                 android:id="@+id/st_login"
 

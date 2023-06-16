@@ -1,7 +1,7 @@
 <resources>
 
     <string name="UnderlineView"><u>View</u></string>
-    <string name="app_name" translatable="false">Madadgar</string>
+    <string name="app_name">Madadgar</string>
 
     <string name="menu_home">Home</string>
     <string name="activyt_close">Do you want to close this activity</string>
@@ -243,8 +243,6 @@ PDMA Madadgar App is an integrated system to enhance collaboration between commu
 
 
 
-
-    <!--     Complaint-->
 
     <!--     Complaint-->
 

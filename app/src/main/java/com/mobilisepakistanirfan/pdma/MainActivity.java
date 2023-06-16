@@ -359,13 +359,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // this.finish();
 
                 return true;
-            case R.id.st_sigup:
-
-                intent = new Intent(this, SignUp.class);
-                startActivity(intent);
-                //   this.finish();
-
-                return true;
+//            case R.id.st_sigup:
+//
+//                intent = new Intent(this, SignUp.class);
+//                startActivity(intent);
+//                //   this.finis h();
+//
+//                return true;
 
 
             case R.id.nav_getdate:

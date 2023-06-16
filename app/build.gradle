@@ -8,8 +8,8 @@ android {
         applicationId "com.mobilisepakistanirfan.pdma"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 24
-        versionName "24.0.1"
+        versionCode 25
+        versionName "25.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
