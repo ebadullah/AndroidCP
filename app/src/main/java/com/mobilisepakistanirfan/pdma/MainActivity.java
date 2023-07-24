@@ -2,6 +2,7 @@ package com.mobilisepakistanirfan.pdma;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -50,8 +51,6 @@ import com.mobilisepakistanirfan.pdma.global.MyPref;
 import com.mobilisepakistanirfan.pdma.global.MyReceiver;
 import com.mobilisepakistanirfan.pdma.global.ServerConfiguration;
 import com.mobilisepakistanirfan.pdma.global.UserPref;
-import com.mobilisepakistanirfan.pdma.gps.ShowLocationActivity2;
-import com.mobilisepakistanirfan.pdma.gps.ShowlocaitonActivityNew;
 import com.mobilisepakistanirfan.pdma.gps.TurnOnGPS;
 import com.mobilisepakistanirfan.pdma.report.Complaints;
 import com.mobilisepakistanirfan.pdma.report.DailySituationReport;
@@ -64,7 +63,6 @@ import com.mobilisepakistanirfan.pdma.report.RapidNeedAssessment;
 import com.mobilisepakistanirfan.pdma.report.ReportDisaster;
 import com.mobilisepakistanirfan.pdma.report.RiskAssesment;
 import com.mobilisepakistanirfan.pdma.signup.LogIn;
-import com.mobilisepakistanirfan.pdma.signup.SignUp;
 import com.mobilisepakistanirfan.pdma.utilities.Policy;
 import com.squareup.picasso.Picasso;
 
@@ -74,6 +72,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, LocationListener {
 
@@ -103,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         preferences = new MyPref(MainActivity.this);
         userpref2 = new UserPref(MainActivity.this);
+
+        methodRequiresTwoPermission();
 
         // Firebase Notifcaiton
 
@@ -265,7 +268,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         }
-
 
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -612,10 +614,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, this);
-        }
-        catch(SecurityException e) {
+        } catch (SecurityException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @AfterPermissionGranted(255)
+    private boolean methodRequiresTwoPermission() {
+        String[] perms = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            perms = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.POST_NOTIFICATIONS};
+        } else {
+            perms = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+        }
+
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            return true;
+        }
+        EasyPermissions.requestPermissions(this, getString(R.string.app_name), 45, perms);
+        return false;
     }
 
     @Override
@@ -653,9 +678,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         protected String doInBackground(String... args) {
+//            String url = "https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=" + API;
+
             //String response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&units=metric&appid=" + API);
             String url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=metric&appid=" + API;
             String response = HttpRequest.excuteGet(url);
+
+            Log.e("###", response);
 
             return response;
         }
@@ -748,7 +777,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
-        //    unregisterReceiver(MyReceiver);
+        unregisterReceiver(MyReceiver);
     }
 
 }
