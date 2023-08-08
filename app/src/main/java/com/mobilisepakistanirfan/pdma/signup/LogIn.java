@@ -5,11 +5,15 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.mobilisepakistanirfan.pdma.MainActivity;
 import com.mobilisepakistanirfan.pdma.R;
 import com.mobilisepakistanirfan.pdma.databinding.ActivityLoginBinding;
+import com.mobilisepakistanirfan.pdma.global.MyPref;
+import com.mobilisepakistanirfan.pdma.global.UserPref;
 import com.mobilisepakistanirfan.pdma.gps.TurnOnGPS;
 
 import org.json.JSONException;
@@ -17,11 +21,17 @@ import org.json.JSONObject;
 
 public class LogIn extends AppCompatActivity {
 
+    MyPref preferences;
+    UserPref userpref2;
+
     ActivityLoginBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login );
+
+
+
 
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {

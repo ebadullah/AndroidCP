@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -21,9 +22,7 @@ import androidx.databinding.DataBindingUtil;
 import com.mobilisepakistanirfan.pdma.R;
 import com.mobilisepakistanirfan.pdma.data.LocalDataManager;
 import com.mobilisepakistanirfan.pdma.databinding.ComplaintsBinding;
-import com.mobilisepakistanirfan.pdma.databinding.ReportdisasterBinding;
 import com.mobilisepakistanirfan.pdma.global.MyPref;
-import com.mobilisepakistanirfan.pdma.global.ServerConfiguration;
 import com.mobilisepakistanirfan.pdma.global.UploadComplaint;
 import com.mobilisepakistanirfan.pdma.gps.TurnOnGPS;
 
@@ -38,22 +37,23 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class Complaints extends AppCompatActivity  {
-    ComplaintsBinding binding ;
-    int UserID=0;
+public class Complaints extends AppCompatActivity {
+    ComplaintsBinding binding;
+    int UserID = 0;
     MyPref preferences;
     ArrayList<String> listComplaintCategory;
-    String sComplaintCategory="";
+    String sComplaintCategory = "";
 
     ArrayList<String> listIncidentNature;
-    String sComplaintNature="";
+    String sComplaintNature = "";
 
 
     ArrayList<String> listComplaintDamageType;
-    String sComplaintDamageType="";
+    String sComplaintDamageType = "";
 
-    private Bitmap bitmapimag1=null;
-    private Bitmap bitmapimag2=null;
+    private Bitmap bitmapimag1 = null;
+    private Bitmap bitmapimag2 = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +61,17 @@ public class Complaints extends AppCompatActivity  {
         binding = DataBindingUtil.setContentView(this, R.layout.complaints);
 
 
-        listComplaintCategory=new ArrayList<>();
-        listComplaintCategory= LocalDataManager.GetComplaintCategories(this);
 
 
-        listIncidentNature=new ArrayList<>();
-        listIncidentNature= LocalDataManager.GetIncidentNature(this);
+        listComplaintCategory = new ArrayList<>();
+        listComplaintCategory = LocalDataManager.GetComplaintCategories(this);
 
-        listComplaintDamageType=new ArrayList<>();
-        listComplaintDamageType= LocalDataManager.GetComplaintDamageType(this);
+
+        listIncidentNature = new ArrayList<>();
+        listIncidentNature = LocalDataManager.GetIncidentNature(this);
+
+        listComplaintDamageType = new ArrayList<>();
+        listComplaintDamageType = LocalDataManager.GetComplaintDamageType(this);
 
         preferences = new MyPref(this);
         binding.lvback.setOnClickListener(new View.OnClickListener() {
@@ -80,13 +82,12 @@ public class Complaints extends AppCompatActivity  {
         });
 
 
-
         binding.btnIncidentDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                final  Calendar cldr = Calendar.getInstance();
+                final Calendar cldr = Calendar.getInstance();
                 int day = cldr.get(Calendar.DAY_OF_MONTH);
                 int month = cldr.get(Calendar.MONTH);
                 int year = cldr.get(Calendar.YEAR);
@@ -102,9 +103,7 @@ public class Complaints extends AppCompatActivity  {
                         }, year, month, day);
 
 
-
                 picker.show();
-
 
 
             }
@@ -114,9 +113,9 @@ public class Complaints extends AppCompatActivity  {
         binding.lcomplaintcategory.setOnClickListener(new View.OnClickListener() {
             //@Override
             public void onClick(View v) {
-                Intent  intent = new Intent(Complaints.this, RecyclerViewA.class);
-                intent.putExtra("mylist",listComplaintCategory);
-                startActivityForResult(intent,11);
+                Intent intent = new Intent(Complaints.this, RecyclerViewA.class);
+                intent.putExtra("mylist", listComplaintCategory);
+                startActivityForResult(intent, 11);
 
             }
         });
@@ -125,9 +124,9 @@ public class Complaints extends AppCompatActivity  {
         binding.lcomplaintincidentnature.setOnClickListener(new View.OnClickListener() {
             //@Override
             public void onClick(View v) {
-                Intent  intent = new Intent(Complaints.this, RecyclerViewA.class);
-                intent.putExtra("mylist",listIncidentNature);
-                startActivityForResult(intent,12);
+                Intent intent = new Intent(Complaints.this, RecyclerViewA.class);
+                intent.putExtra("mylist", listIncidentNature);
+                startActivityForResult(intent, 12);
 
             }
         });
@@ -136,9 +135,9 @@ public class Complaints extends AppCompatActivity  {
         binding.lcomplaintdamagetype.setOnClickListener(new View.OnClickListener() {
             //@Override
             public void onClick(View v) {
-                Intent  intent = new Intent(Complaints.this, RecyclerViewA.class);
-                intent.putExtra("mylist",listComplaintDamageType);
-                startActivityForResult(intent,13);
+                Intent intent = new Intent(Complaints.this, RecyclerViewA.class);
+                intent.putExtra("mylist", listComplaintDamageType);
+                startActivityForResult(intent, 13);
 
             }
         });
@@ -147,18 +146,14 @@ public class Complaints extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
 
-                if(datavalidation()==false)
-                {
+                if (datavalidation() == false) {
                     return;
                 }
 
 
-
-
-
                 // upload picture
 
-                ArrayList<Bitmap> bitmapparr=new ArrayList<>();
+                ArrayList<Bitmap> bitmapparr = new ArrayList<>();
 
 
                 try {
@@ -170,9 +165,7 @@ public class Complaints extends AppCompatActivity  {
 
 
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
 
                 }
 
@@ -184,25 +177,20 @@ public class Complaints extends AppCompatActivity  {
                         bitmapparr.add(bitmapimag2);
 
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
 
                 }
 
-                UploadComplaint.volleyPost(Complaints.this,UploadDate(),bitmapparr);
+                UploadComplaint.volleyPost(Complaints.this, UploadDate(), bitmapparr);
 
             }
         });
 
 
-
-
-
         binding.rd6LV1.setOnClickListener(new View.OnClickListener() {
             //@Override
             public void onClick(View v) {
-                ImgView=binding.rd6Imgv1;
+                ImgView = binding.rd6Imgv1;
                 selectImage(Complaints.this);
 
             }
@@ -210,7 +198,7 @@ public class Complaints extends AppCompatActivity  {
         binding.rd6LV2.setOnClickListener(new View.OnClickListener() {
             //@Override
             public void onClick(View v) {
-                ImgView=binding.rd6Imgv2;
+                ImgView = binding.rd6Imgv2;
 
                 selectImage(Complaints.this);
 
@@ -220,13 +208,9 @@ public class Complaints extends AppCompatActivity  {
     }
 
 
-
-
-
-
     // upload image
     private void selectImage(Context context) {
-        final CharSequence[] options = { "Take Photo", "Choose from Gallery","Remove Picture","Cancel" };
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Remove Picture", "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Choose your picture");
@@ -243,12 +227,11 @@ public class Complaints extends AppCompatActivity  {
                 } else if (options[item].equals("Choose from Gallery")) {
                     Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     //    String filpath=android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                    startActivityForResult(pickPhoto , 1);
+                    startActivityForResult(pickPhoto, 1);
 
                 } else if (options[item].equals("Cancel")) {
                     dialog.dismiss();
-                }else
-                {
+                } else {
                     ImgView.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_black_24dp));
                 }
             }
@@ -257,9 +240,8 @@ public class Complaints extends AppCompatActivity  {
     }
 
 
-
-
     ImageView ImgView;
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -269,12 +251,12 @@ public class Complaints extends AppCompatActivity  {
                 sComplaintCategory = data.getStringExtra("data");
                 binding.rd1Tv.setText(sComplaintCategory);
             }
-        }else if (requestCode == 12) {
+        } else if (requestCode == 12) {
             if (resultCode == Activity.RESULT_OK) {
                 sComplaintNature = data.getStringExtra("data");
                 binding.rd1cn.setText(sComplaintNature);
             }
-        }else if (requestCode == 13) {
+        } else if (requestCode == 13) {
             if (resultCode == Activity.RESULT_OK) {
                 sComplaintDamageType = data.getStringExtra("data");
                 binding.rd1cdt.setText(sComplaintDamageType);
@@ -334,44 +316,37 @@ public class Complaints extends AppCompatActivity  {
     }
 
 
-
-    public  boolean  datavalidation()
-    {
-        if(binding.rd3Tv.getText().equals(""))
-        {
-            Toast.makeText(this,"Please Enter Complaint Title",Toast.LENGTH_SHORT).show();
-            return  false;
+    public boolean datavalidation() {
+        if (binding.rd3Tv.getText().equals("")) {
+            Toast.makeText(this, "Please Enter Complaint Title", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        if(binding.rd5Tv.getText().equals(""))
-        {      Toast.makeText(this,"Please Enter Complaint Detail",Toast.LENGTH_SHORT).show();
-            return  false;
+        if (binding.rd5Tv.getText().equals("")) {
+            Toast.makeText(this, "Please Enter Complaint Detail", Toast.LENGTH_SHORT).show();
+            return false;
         }
 
 
-
-
-        return  true;
+        return true;
     }
 
     @Override
-    public  void onBackPressed()
-    {
+    public void onBackPressed() {
 
         TurnOnGPS.CloseActivityalerd(this);
     }
 
 
-    public  JSONObject UploadDate()
-    {
+    public JSONObject UploadDate() {
 
-        UserID=preferences.getUserId();
+        UserID = preferences.getUserId();
 
-        String Title=binding.rd3Tv.getText().toString();
-        String Detail=binding.rd5Tv.getText().toString();
+        String Title = binding.rd3Tv.getText().toString();
+        String Detail = binding.rd5Tv.getText().toString();
 
-        int complaint_category_id=LocalDataManager.GetComplaintCategoryId(binding.rd1Tv.getText().toString().trim(),Complaints.this);
-        int incident_nature_id=LocalDataManager.GetIncidentNatureId(binding.rd1cn.getText().toString().trim(),Complaints.this);
-        int complaint_damage_type_id=LocalDataManager.GetComplaintDamageTypeId(binding.rd1cdt.getText().toString().trim(),Complaints.this);
+        int complaint_category_id = LocalDataManager.GetComplaintCategoryId(binding.rd1Tv.getText().toString().trim(), Complaints.this);
+        int incident_nature_id = LocalDataManager.GetIncidentNatureId(binding.rd1cn.getText().toString().trim(), Complaints.this);
+        int complaint_damage_type_id = LocalDataManager.GetComplaintDamageTypeId(binding.rd1cdt.getText().toString().trim(), Complaints.this);
         String incident_date = binding.btnIncidentDate.getText().toString().trim();
 
         Date c = Calendar.getInstance().getTime();
@@ -380,20 +355,20 @@ public class Complaints extends AppCompatActivity  {
 
         JSONObject log = new JSONObject();
         try {
-            log .put("Title", Title);
-            log .put("Detail", Detail);
-            log .put("UserId", UserID);
-            log .put("complaint_category_id", complaint_category_id);
-            log .put("incident_nature_id", incident_nature_id);
-            log .put("complaint_damage_type_id", complaint_damage_type_id);
-            log .put("incident_date", incident_date);
-            log .put("Dated", "0");
+            log.put("Title", Title);
+            log.put("Detail", Detail);
+            log.put("UserId", UserID);
+            log.put("complaint_category_id", complaint_category_id);
+            log.put("incident_nature_id", incident_nature_id);
+            log.put("complaint_damage_type_id", 0);
+            log.put("incident_date", incident_date);
+            log.put("Dated", "0");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return  log;
+        return log;
     }
 
 

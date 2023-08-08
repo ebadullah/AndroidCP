@@ -8,9 +8,9 @@
             <!--                android:id="@+id/st_sigup"-->
 
             <!--                android:title="@string/lg_sign" />-->
-            <item
-                android:id="@+id/st_login"
-                android:title="@string/s_login" />
+<!--            <item-->
+<!--                android:id="@+id/st_login"-->
+<!--                android:title="@string/s_login" />-->
 
 
             <item

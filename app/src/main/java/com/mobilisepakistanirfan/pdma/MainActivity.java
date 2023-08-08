@@ -135,8 +135,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         // call intenet check
-        MyReceiver = new MyReceiver();
-        broadcastIntent();
+//        MyReceiver = new MyReceiver();
+//        broadcastIntent();
 
         userId = preferences.getUserId();
 
@@ -295,7 +295,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+//        Log.e("####", "" + preferences.getUserId());
+//        if (preferences.getUserId() == 0) {
+            getMenuInflater().inflate(R.menu.main, menu);
+//        }else{
+//            getMenuInflater().inflate(R.menu.mainlogout, menu);
+//        }
+
+        if(userId  == 0){
+            MenuItem item = menu.findItem(R.id.st_login);
+            item.setVisible(true);
+            MenuItem items = menu.findItem(R.id.st_logout);
+            items.setVisible(false);
+
+        }
+        else {
+            MenuItem item = menu.findItem(R.id.st_logout);
+            item.setVisible(true);
+            MenuItem items = menu.findItem(R.id.st_login);
+            items.setVisible(false);
+
+        }
+
         return true;
     }
 
@@ -380,17 +401,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.st_logout:
 
-                MyPref prefs = new MyPref(this);
-                UserPref userpre = new UserPref(this);
-                userId = 0;
-                prefs.setUserId(0);
-                prefs.setUserDistrict("");
-                prefs.setFirebaseVolnt("0");
+                preferences.setUserId(0);
+                preferences.setUserDistrict("");
+                preferences.setFirebaseVolnt("0");
 
-                userpre.setUserUserStatus("");
-                userpre.setUserTypel("");
-                userpre.setUserEmail("");
-                userpre.setUserMobileNo("");
+                Log.e("####2", " " + preferences.getUserId());
+
+                userpref2.setUserUserStatus("");
+                userpref2.setUserTypel("");
+                userpref2.setUserEmail("");
+                userpref2.setUserMobileNo("");
 
                 intent = new Intent(this, LogIn.class);
                 startActivity(intent);
@@ -767,6 +787,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TurnOnGPS.CloseActivityalerd(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        userId = preferences.getUserId();
+    }
 
     // check internet connection
 
@@ -777,7 +803,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(MyReceiver);
+//        unregisterReceiver(MyReceiver);
     }
 
 }

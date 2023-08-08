@@ -1,5 +1,6 @@
 package com.mobilisepakistanirfan.pdma.report;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -61,8 +62,6 @@ public class DailySituationReport extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.dailysituation);
 
-
-
         binding.lvback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,9 +110,6 @@ public class DailySituationReport extends AppCompatActivity  {
         binding.lvback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
 
                 DailySituationReport.this.finish();
 
@@ -204,6 +200,7 @@ class  GetDataServer extends AsyncTask {
         return null;
     }
 
+    @SuppressLint("SuspiciousIndentation")
     @Override
     protected void onPostExecute(Object o) {
         try {
