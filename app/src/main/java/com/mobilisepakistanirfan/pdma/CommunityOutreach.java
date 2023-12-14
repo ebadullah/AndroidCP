@@ -35,7 +35,7 @@ public class CommunityOutreach extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/pdmakpk"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://x.com/PDMAKP?t=vzvNftnYZOlRTov6beihZA&s=09"));
                 startActivity(browserIntent);
             }
         });

@@ -1,7 +1,7 @@
 <resources>
 
     <string name="UnderlineView"><u>View</u></string>
-    <string name="app_name">Madadgar</string>
+    <string name="app_name" translatable="false">Madadgar</string>
 
     <string name="menu_home">Home</string>
     <string name="activyt_close">Do you want to close this activity</string>
@@ -14,12 +14,8 @@ This is an emergency alert for your area. If you are in your district, willing t
 
     <string name="UnActive"> No, out of station</string>
 
-
-
-
     <string name="yes">Yes</string>
     <string name="no">No</string>
-
 
     <!--    Report Disaster Strings-->
     <string name="rd1">Select District</string>
@@ -30,7 +26,7 @@ This is an emergency alert for your area. If you are in your district, willing t
     <string name="rd6">Upload Pictures</string>
 
 
-    <string name="undertakingGPS"></string>
+    <string name="undertakingGPS" translatable="false"></string>
 
     <!--    Rapid Need Asssesment-->
     <string name="rna1">Select District</string>
@@ -246,10 +242,10 @@ PDMA Madadgar App is an integrated system to enhance collaboration between commu
 
     <!--     Complaint-->
 
-    <string name="s_complaint_damagetype">	Select Damage Type 	</string>
-    <string name="s_complaint_nature">	Select Nature 	</string>
-    <string name="s_complaint_cateogry">	Select Category 	</string>
-    <string name="s_incidentdate"> Select Incident Date	</string>
+    <string name="s_complaint_damagetype" translatable="false">	Select Damage Type 	</string>
+    <string name="s_complaint_nature" translatable="false">	Select Nature 	</string>
+    <string name="s_complaint_cateogry" translatable="false">	Select Category 	</string>
+    <string name="s_incidentdate" translatable="false"> Select Incident Date	</string>
 
     <string name="s_complaint">	Register Complaint 	</string>
     <string name="s_ctitle">	Subject 	</string>
@@ -271,11 +267,11 @@ PDMA Madadgar App is an integrated system to enhance collaboration between commu
     <string name="flood_alert">Flood Bulletin</string>
     <string name="flood_forcasting_division">Flood Forcasting Division</string>
     <string name="attach_any_evidence">Attach Any Evidence</string>
-    <string name="default_notification_channel_id">firebasenotificainoidirfan</string>
-    <string name="fcm_message">firebasemessageirfan</string>
-    <string name="default_notification_channel_name">NotificainoChealeNameirfan</string>
-    <string name="msg_subscribed">messageirfan</string>
-    <string name="msg_subscribe_failed">subscribpifailedmessage</string>
+    <string name="default_notification_channel_id" translatable="false">firebasenotificainoidirfan</string>
+    <string name="fcm_message" translatable="false">firebasemessageirfan</string>
+    <string name="default_notification_channel_name" translatable="false">NotificainoChealeNameirfan</string>
+    <string name="msg_subscribed" translatable="false">messageirfan</string>
+    <string name="msg_subscribe_failed" translatable="false">subscribpifailedmessage</string>
 
 
     <!--     UserProfile -->
@@ -287,14 +283,7 @@ PDMA Madadgar App is an integrated system to enhance collaboration between commu
 
 
     <string name="DNA_alert">This tab can be used for reporting damages caused by different disasters. Please note that this is not a direct claim for payment compensation. After receipt of disaster related damages reported via Madadgar, PDMA will forward your case to the district government for physical verification and subsequent decision to recommend the reported damages for compensation or not. As per Khyber Pakhtunkhwa Government Gazette dated July 12, 2019,  damages caused by disasters must be reported within the specified period of time. Following is the timeline for submission:\n-Loss of Life-Not more than 45 days\n-Major Injury-Not more than 15 days\n-Loss of Houses-Not more than 30 days\n-Loss of Livestock-Not More than 15 days\n-Loss of Crops and Orchards- Not more than 30 day\t</string>
-
-
-
-
-
-
-
-
+    <string name="submission" translatable="false">Please be aware that submissions through our complaint system are not admissible in court. While we aim to address all concerns raised.</string>
 
 
 </resources>

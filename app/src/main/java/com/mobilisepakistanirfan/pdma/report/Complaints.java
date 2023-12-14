@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,9 +60,6 @@ public class Complaints extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.complaints);
-
-
-
 
         listComplaintCategory = new ArrayList<>();
         listComplaintCategory = LocalDataManager.GetComplaintCategories(this);
@@ -142,11 +140,19 @@ public class Complaints extends AppCompatActivity {
             }
         });
 
+        final boolean value = false;
+
+
+        binding.checkbox.setOnCheckedChangeListener((compoundButton, b) -> {
+            binding.btnsubmit.setEnabled(b);
+        });
+
+
         binding.btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (datavalidation() == false) {
+                if (datavalidation() == false && !binding.checkbox.isChecked()) {
                     return;
                 }
 

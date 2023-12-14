@@ -3,13 +3,13 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
 
-    compileSdkVersion 33
+    compileSdkVersion 34
     defaultConfig {
         applicationId "com.mobilisepakistanirfan.pdma"
-        minSdkVersion 21
-        targetSdkVersion 33
-        versionCode 25
-        versionName "25.0.1"
+        minSdkVersion 24
+        targetSdkVersion 34
+        versionCode 31
+        versionName "27.0.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

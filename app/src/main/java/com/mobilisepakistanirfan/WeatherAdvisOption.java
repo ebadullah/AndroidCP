@@ -45,10 +45,6 @@ public class WeatherAdvisOption extends AppCompatActivity {
             }
         });
 
-
-
-
-
         binding.weatherforcast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,11 +54,6 @@ public class WeatherAdvisOption extends AppCompatActivity {
                 startActivity(intt);
             }
         });
-
-
-
-
-
 
         binding.Glof.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +92,7 @@ public class WeatherAdvisOption extends AppCompatActivity {
             public void onClick(View view) {
                 Intent  intt = new Intent(WeatherAdvisOption.this, PMDwebView.class);
                 intt.putExtra("header", getString(R.string.flood_alert));
-                intt.putExtra("link", "https://ffd.pmd.gov.pk/homepage/");
+                intt.putExtra("link", "https://ffd.pmd.gov.pk/home/");
                 startActivity(intt);
             }
         });

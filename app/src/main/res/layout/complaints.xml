@@ -20,11 +20,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
-
                 android:clickable="true"
-                android:focusable="true"
-
-                >
+                android:focusable="true">
 
                 <ImageButton
 
@@ -297,6 +294,12 @@
 
                 </LinearLayout>
 
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/submission" />
+
 
                 <LinearLayout style="@style/nLinerLayout">
 
@@ -304,6 +307,7 @@
                     <Button
 
                         android:id="@+id/btnsubmit"
+                        android:enabled="false"
                         style="@style/SubmiteButt" />
 
                 </LinearLayout>

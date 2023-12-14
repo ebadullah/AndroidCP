@@ -49,10 +49,9 @@ import java.util.List;
 
 public class QuickLink extends AppCompatActivity {
 
-    RecycleviewBinding binding ;
+    RecycleviewBinding binding;
     QuickLinksCustomAdapter mAdapter;
 
-    
 
     String sHeader;
 
@@ -63,14 +62,12 @@ public class QuickLink extends AppCompatActivity {
         //list=(ArrayList<String>) getIntent().getSerializableExtra("mylist");
 
 
-        sHeader=getString(R.string.s_ql);
+        sHeader = getString(R.string.s_ql);
         binding.header.setText(sHeader);
 
         binding.edSearch.setVisibility(View.GONE);
 
-        new GetDataServerQuickLink(QuickLink.this, ServerConfiguration.ServerURL+ "GetQuickLinksAction",binding.recycleview).execute();
-
-
+        new GetDataServerQuickLink(QuickLink.this, ServerConfiguration.ServerURL + "GetQuickLinksAction", binding.recycleview).execute();
 
 
         binding.lvback.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +76,6 @@ public class QuickLink extends AppCompatActivity {
                 ((Activity) QuickLink.this).finish();
             }
         });
-
-
 
 
         // RecycleView Text Search View Filter
@@ -96,7 +91,7 @@ public class QuickLink extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-              //  filter(editable.toString());
+                //  filter(editable.toString());
             }
         });
 
@@ -123,21 +118,20 @@ public class QuickLink extends AppCompatActivity {
     }
 
 
-
-
 }
 
-class  QuickLinksCustomAdapter extends RecyclerView.Adapter {
+class QuickLinksCustomAdapter extends RecyclerView.Adapter {
 
     Context mContext;
     List<String> mListlink;
 
     List<String> arylistheade;
-    public QuickLinksCustomAdapter(Context context, List<String> listlinks,List<String> listheader ){
+
+    public QuickLinksCustomAdapter(Context context, List<String> listlinks, List<String> listheader) {
         mContext = context;
         mListlink = listlinks;
 
-        arylistheade=listheader;
+        arylistheade = listheader;
     }
 
     // filter
@@ -146,6 +140,7 @@ class  QuickLinksCustomAdapter extends RecyclerView.Adapter {
 //        this.arylistheade = filterdNames;
 //        notifyDataSetChanged();
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -155,15 +150,14 @@ class  QuickLinksCustomAdapter extends RecyclerView.Adapter {
     }
 
 
-
-
     Intent data = new Intent();
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final ViewHolder vh = (ViewHolder) holder;
 
         vh.txtheader.setText(arylistheade.get(position));
-       vh.txtrcv.setText(mListlink.get(position));
+        vh.txtrcv.setText(mListlink.get(position));
 
         vh.lv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,19 +165,15 @@ class  QuickLinksCustomAdapter extends RecyclerView.Adapter {
                 String txtrcv = vh.txtrcv.getText().toString();
 
 
-
-
-                Intent  intt = new Intent(mContext, PMDwebView.class);
+                Intent intt = new Intent(mContext, PMDwebView.class);
                 intt.putExtra("header", mContext.getString(R.string.s_ql));
                 intt.putExtra("link", txtrcv);
                 mContext.startActivity(intt);
 
 
-
             }
         });
     }
-
 
 
     @Override
@@ -208,16 +198,10 @@ class  QuickLinksCustomAdapter extends RecyclerView.Adapter {
     }
 
 
-
-
-
-
-
-
 }
 
 
-class  GetDataServerQuickLink extends AsyncTask {
+class GetDataServerQuickLink extends AsyncTask {
     QuickLinksCustomAdapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView recycleviewR;
@@ -225,10 +209,10 @@ class  GetDataServerQuickLink extends AsyncTask {
     ProgressDialog mDialog;
     String mUserMsg, URL;
 
-    public GetDataServerQuickLink(Context context, String URL,RecyclerView RV) {
+    public GetDataServerQuickLink(Context context, String URL, RecyclerView RV) {
         this.mContext = context;
         this.URL = URL;
-        this.recycleviewR=RV;
+        this.recycleviewR = RV;
         mDialog = new ProgressDialog(context);
 
 
@@ -260,7 +244,6 @@ class  GetDataServerQuickLink extends AsyncTask {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
 
 
-
             bw.flush();
 
             int responseCode = connection.getResponseCode();
@@ -288,20 +271,20 @@ class  GetDataServerQuickLink extends AsyncTask {
         try {
 
             //connection isn't available or something is wrong with server address
-            if(mUserMsg != null)
-                throw  new IOException();
+            if (mUserMsg != null)
+                throw new IOException();
 
 
-            String resp = (String)o;
+            String resp = (String) o;
 
-            JsonArray.ArrayString=resp;
+            JsonArray.ArrayString = resp;
 
             JSONObject jsonObj = new JSONObject(resp);
 
             // Getting JSON Array node
             JSONArray contacts = jsonObj.getJSONArray("result");
-            ArrayList<String> listDpt=new ArrayList<String>();
-            ArrayList<String> listLink=new ArrayList<String>();
+            ArrayList<String> listDpt = new ArrayList<String>();
+            ArrayList<String> listLink = new ArrayList<String>();
 
             for (int i = 0; i < contacts.length(); i++) {
                 JSONObject c = contacts.getJSONObject(i);
@@ -310,23 +293,19 @@ class  GetDataServerQuickLink extends AsyncTask {
                 String link = c.getString("link");
 
 
-
-
                 listDpt.add(department);
                 listLink.add(link);
             }
 
             mLayoutManager = new LinearLayoutManager(mContext);
             recycleviewR.setLayoutManager(mLayoutManager);
-            mAdapter = new QuickLinksCustomAdapter(mContext,listLink,listDpt);
+            mAdapter = new QuickLinksCustomAdapter(mContext, listLink, listDpt);
             recycleviewR.setAdapter(mAdapter);
 
 
-
-
-            if ( resp == null || resp.equals(""))
+            if (resp == null || resp.equals(""))
                 throw new NullPointerException("Server response is empty");
-            else if(resp.equals("-1")){
+            else if (resp.equals("-1")) {
                 mUserMsg = "Incorrect username or password";
             } else {
                 mUserMsg = null;
@@ -334,10 +313,10 @@ class  GetDataServerQuickLink extends AsyncTask {
 
             }
 
-        }  catch (IOException e) {
+        } catch (IOException e) {
             //if connection was available via connecting but
             //we can't get data from server..
-            if(mUserMsg == null)
+            if (mUserMsg == null)
                 mUserMsg = "Please check connection";
             e.printStackTrace();
         } catch (NullPointerException e) {
@@ -354,8 +333,8 @@ class  GetDataServerQuickLink extends AsyncTask {
 
         super.onPostExecute(o);
     }
-    private Date parseDate(String date, String format) throws ParseException
-    {
+
+    private Date parseDate(String date, String format) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat(format);
         return formatter.parse(date);
     }
